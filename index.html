@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Operators</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <h1>JAVASCRIPT OPERATORS</h1>
+  <div class="container">
+    <!-- GIVEN statement: boxes removed here -->
+    <p class="given">
+      GIVEN: If A = 23.72 and B = 5.2, compute for the following:
+    </p>
+
+    <div class="operators">
+      <!-- Arithmetic Operators -->
+      <div class="card">
+        <h2>Arithmetic Operators</h2>
+        <p>Exponent:</p>
+        <p>Modulo:</p>
+        <button class="answer-btn">Show Answer</button>
+      </div>
+
+      <!-- Comparison Operators: boxes added for A and B -->
+      <div class="card">
+        <h2>Comparison Operators</h2>
+        <p>Is <span class="box">A</span> greater than <span class="box">B</span>?</p>
+        <p>Is <span class="box">A</span> equal to <span class="box">B</span>?</p>
+        <button class="answer-btn">Show Answer</button>
+      </div>
+
+      <!-- Logical Operators -->
+      <div class="card">
+        <h2>Logical Operators</h2>
+        <p>True or False:</p>
+        <p>True or False:</p>
+        <button class="answer-btn">Show Answer</button>
+      </div>
+    </div>
+
+    <button class="refresh">Refresh</button>
+  </div>
+
+  <footer>
+    <p>&copy; AY 2024-2025 | Student Name | 9-Section</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const answers = {
+        arithmetic: [
+          "Exponent: " + Math.pow(23.72, 5.2).toFixed(2),
+          "Modulo: " + (23.72 % 5.2).toFixed(2)
+        ],
+        comparison: [
+          "Is A greater than B? " + (23.72 > 5.2),
+          "Is A equal to B? " + (23.72 === 5.2)
+        ],
+        logical: [
+          "True or False: " + (23.72 > 5.2 && 5.2 < 10),
+          "True or False: " + (23.72 < 5.2 || 5.2 > 10)
+        ]
+      };
+
+      document.querySelectorAll(".card").forEach((card, index) => {
+        const button = card.querySelector(".answer-btn");
+        let answerVisible = false;
+        let answerBox; // variable to hold the created answer container
+
+        button.addEventListener("click", function () {
+          if (!answerVisible) {
+            // Create a container for the answers
+            answerBox = document.createElement("div");
+            answerBox.classList.add("answer-box");
+            
+            // Append each answer as a paragraph inside the answer box
+            answers[Object.keys(answers)[index]].forEach(ans => {
+              const p = document.createElement("p");
+              p.textContent = ans;
+              answerBox.appendChild(p);
+            });
+            // Append the answer box to the card
+            card.appendChild(answerBox);
+            button.textContent = "Hide Answer";
+          } else {
+            // Remove the answer box if it exists
+            if (answerBox) {
+              answerBox.remove();
+            }
+            button.textContent = "Show Answer";
+          }
+          answerVisible = !answerVisible;
+        });
+      });
+
+      document.querySelector(".refresh").addEventListener("click", function () {
+        location.reload();
+      });
+    });
+  </script>
+</body>
+</html>
